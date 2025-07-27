@@ -1,32 +1,32 @@
 {
     "links": [
         {
-            "name": "Google 搜索",
-            "url": "https://www.google.com"
+            "name": "worker测试",
+            "url": "https://worktest.janelink.cn"
         },
         {
-            "name": "GitHub",
-            "url": "https://github.com"
+            "name": "照妖镜",
+            "url": "https://zyj.22web.org/"
         },
         {
-            "name": "Cloudflare",
-            "url": "https://www.cloudflare.com"
+            "name": "TFM文件管理",
+            "url": "https://tfm.janelink.cn/"
         },
         {
-            "name": "MDN Web Docs",
-            "url": "https://developer.mozilla.org"
+            "name": "手机信息",
+            "url": "https://info.janelink.cn/?page=overview"
         },
         {
-            "name": "Stack Overflow",
-            "url": "https://stackoverflow.com"
+            "name": "支付系统",
+            "url": "http://pay.janelink.cn/"
         },
         {
-            "name": "Twitter",
-            "url": "https://twitter.com"
+            "name": "VPN",
+            "url": "https://node.janelink.cn/9afcaa29-dad3-476f-bb1d-203273ce0f43"
         },
         {
-            "name": "YouTube",
-            "url": "https://www.youtube.com"
+            "name": "VPN2",
+            "url": "https://node2.janelink.cn/node"
         },
         {
             "name": "Wikipedia",
