@@ -1,6 +1,10 @@
 {
     "links": [
         {
+            "name": "单页程序",
+            "url": "https://dh.janelink.cn"
+        },
+        {
             "name": "worker测试",
             "url": "https://worktest.janelink.cn"
         },
