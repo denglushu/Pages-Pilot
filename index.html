@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我的导航页</title>
     <style>
+        /* 与方案一相同的样式 */
         body {
             font-family: 'Arial', sans-serif;
             max-width: 800px;
@@ -40,167 +41,32 @@
             color: #3498db;
             font-weight: bold;
         }
-        .controls {
-            margin: 20px 0;
-            padding: 15px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        input {
-            padding: 8px;
-            margin: 5px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        button {
-            padding: 8px 15px;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #2980b9;
-        }
-        .edit-btn, .delete-btn {
-            padding: 3px 6px;
-            margin: 3px;
-            font-size: 12px;
-        }
-        .edit-btn {
-            background-color: #f39c12;
-        }
-        .edit-btn:hover {
-            background-color: #e67e22;
-        }
-        .delete-btn {
-            background-color: #e74c3c;
-        }
-        .delete-btn:hover {
-            background-color: #c0392b;
-        }
     </style>
 </head>
 <body>
     <h1>我的导航页</h1>
-    
-    <div class="controls">
-        <h3>添加新链接</h3>
-        <input type="text" id="linkName" placeholder="链接名称">
-        <input type="url" id="linkUrl" placeholder="https://example.com">
-        <button id="addBtn">添加</button>
-    </div>
-    
     <div class="container" id="linksContainer">
-        <!-- 链接将在这里动态生成 -->
+        <!-- 链接将通过JavaScript动态加载 -->
     </div>
 
     <script>
-        // 从本地存储加载链接
-        let links = JSON.parse(localStorage.getItem('navLinks')) || [];
-        
-        // 初始示例链接（如果本地存储为空）
-        if (links.length === 0) {
-            links = [
-                { name: 'Google', url: 'https://google.com' },
-                { name: 'GitHub', url: 'https://github.com' },
-                { name: 'Cloudflare', url: 'https://cloudflare.com' }
-            ];
-            saveLinks();
-        }
-        
-        // DOM 元素
-        const linksContainer = document.getElementById('linksContainer');
-        const linkNameInput = document.getElementById('linkName');
-        const linkUrlInput = document.getElementById('linkUrl');
-        const addBtn = document.getElementById('addBtn');
-        
-        // 渲染链接
-        function renderLinks() {
-            linksContainer.innerHTML = '';
-            links.forEach((link, index) => {
-                const linkItem = document.createElement('div');
-                linkItem.className = 'link-item';
-                linkItem.innerHTML = `
-                    <a href="${link.url}" target="_blank">${link.name}</a>
-                    <div>
-                        <button class="edit-btn" data-index="${index}">编辑</button>
-                        <button class="delete-btn" data-index="${index}">删除</button>
-                    </div>
-                `;
-                linksContainer.appendChild(linkItem);
+        // 加载 links.json 文件
+        fetch('links.json')
+            .then(response => response.json())
+            .then(links => {
+                const container = document.getElementById('linksContainer');
+                links.forEach(link => {
+                    const item = document.createElement('div');
+                    item.className = 'link-item';
+                    item.innerHTML = `<a href="${link.url}" target="_blank">${link.name}</a>`;
+                    container.appendChild(item);
+                });
+            })
+            .catch(error => {
+                console.error('加载链接失败:', error);
+                document.getElementById('linksContainer').innerHTML = 
+                    '<p>无法加载链接，请检查links.json文件</p>';
             });
-            
-            // 添加编辑和删除事件监听器
-            document.querySelectorAll('.edit-btn').forEach(btn => {
-                btn.addEventListener('click', editLink);
-            });
-            
-            document.querySelectorAll('.delete-btn').forEach(btn => {
-                btn.addEventListener('click', deleteLink);
-            });
-        }
-        
-        // 保存链接到本地存储
-        function saveLinks() {
-            localStorage.setItem('navLinks', JSON.stringify(links));
-        }
-        
-        // 添加新链接
-        function addLink() {
-            const name = linkNameInput.value.trim();
-            const url = linkUrlInput.value.trim();
-            
-            if (name && url) {
-                // 确保 URL 以 http:// 或 https:// 开头
-                const fullUrl = url.startsWith('http') ? url : `https://${url}`;
-                
-                links.push({ name, url: fullUrl });
-                saveLinks();
-                renderLinks();
-                
-                // 清空输入框
-                linkNameInput.value = '';
-                linkUrlInput.value = '';
-            }
-        }
-        
-        // 编辑链接
-        function editLink(e) {
-            const index = e.target.dataset.index;
-            const link = links[index];
-            
-            const newName = prompt('输入新名称:', link.name);
-            if (newName !== null) {
-                const newUrl = prompt('输入新 URL:', link.url);
-                if (newUrl !== null) {
-                    links[index] = {
-                        name: newName.trim(),
-                        url: newUrl.startsWith('http') ? newUrl.trim() : `https://${newUrl.trim()}`
-                    };
-                    saveLinks();
-                    renderLinks();
-                }
-            }
-        }
-        
-        // 删除链接
-        function deleteLink(e) {
-            if (confirm('确定要删除这个链接吗?')) {
-                const index = e.target.dataset.index;
-                links.splice(index, 1);
-                saveLinks();
-                renderLinks();
-            }
-        }
-        
-        // 事件监听器
-        addBtn.addEventListener('click', addLink);
-        
-        // 初始渲染
-        renderLinks();
     </script>
 </body>
 </html>
