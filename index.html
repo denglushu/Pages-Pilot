@@ -5,651 +5,202 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我的导航页</title>
     <style>
-        :root {
-            --primary-color: #4a6fa5;
-            --secondary-color: #6b8cae;
-            --accent-color: #ff7e5f;
-            --bg-color: #f5f7fa;
-            --card-bg: #ffffff;
-            --text-color: #333333;
-            --text-light: #666666;
-        }
-        
         body {
-            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        
-        .container {
-            max-width: 1200px;
+            font-family: 'Arial', sans-serif;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 2rem;
-            width: 100%;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        
-        h1 {
-            color: var(--primary-color);
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .subtitle {
-            color: var(--text-light);
-            font-size: 1.2rem;
-        }
-        
-        .search-box {
-            max-width: 600px;
-            margin: 2rem auto;
-            width: 100%;
-        }
-        
-        .search-box input {
-            width: 100%;
-            padding: 12px 20px;
-            border: 2px solid #ddd;
-            border-radius: 30px;
-            font-size: 1rem;
-            outline: none;
-            transition: all 0.3s;
-        }
-        
-        .search-box input:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 10px rgba(74, 111, 165, 0.2);
-        }
-        
-        .category {
-            margin-bottom: 2.5rem;
-            width: 100%;
-        }
-        
-        .category-title {
-            display: flex;
-            align-items: center;
-            color: var(--primary-color);
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #eee;
-        }
-        
-        .category-title i {
-            margin-right: 10px;
-            font-size: 1.3rem;
-        }
-        
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1.5rem;
-            width: 100%;
-        }
-        
-        .card {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-            text-decoration: none;
-            color: inherit;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .card-icon {
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-        
-        .card-title {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--primary-color);
-        }
-        
-        .card-desc {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            flex-grow: 1;
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: auto;
-            padding: 2rem 0;
-            color: var(--text-light);
-            font-size: 0.9rem;
-            border-top: 1px solid #eee;
-            width: 100%;
-        }
-        
-        /* 管理按钮样式 */
-        .admin-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: var(--primary-color);
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            z-index: 100;
-        }
-        
-        /* 管理面板样式 */
-        .admin-panel {
-            position: fixed;
-            top: 0;
-            right: -400px;
-            width: 400px;
-            height: 100vh;
-            background-color: white;
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-            transition: right 0.3s ease;
-            z-index: 101;
             padding: 20px;
-            overflow-y: auto;
+            background-color: #f5f5f5;
+            color: #333;
         }
-        
-        .admin-panel.active {
-            right: 0;
+        h1 {
+            text-align: center;
+            color: #2c3e50;
         }
-        
-        .admin-panel h2 {
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
         }
-        
-        .admin-form-group {
-            margin-bottom: 15px;
+        .link-item {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
         }
-        
-        .admin-form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 600;
+        .link-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-        
-        .admin-form-group input, 
-        .admin-form-group select {
-            width: 100%;
-            padding: 8px 12px;
+        .link-item a {
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+        }
+        .controls {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        input {
+            padding: 8px;
+            margin: 5px;
             border: 1px solid #ddd;
             border-radius: 4px;
         }
-        
-        .admin-actions {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-        
-        .admin-btn-save, 
-        .admin-btn-cancel {
+        button {
             padding: 8px 15px;
+            background-color: #3498db;
+            color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
         }
-        
-        .admin-btn-save {
-            background-color: var(--primary-color);
-            color: white;
+        button:hover {
+            background-color: #2980b9;
         }
-        
-        .admin-btn-cancel {
-            background-color: #f0f0f0;
+        .edit-btn, .delete-btn {
+            padding: 3px 6px;
+            margin: 3px;
+            font-size: 12px;
         }
-        
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 99;
-            display: none;
+        .edit-btn {
+            background-color: #f39c12;
         }
-        
-        .overlay.active {
-            display: block;
+        .edit-btn:hover {
+            background-color: #e67e22;
         }
-        
-        .category-actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
+        .delete-btn {
+            background-color: #e74c3c;
         }
-        
-        .edit-category-btn, 
-        .delete-category-btn {
-            background: none;
-            border: none;
-            color: var(--text-light);
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
-        
-        .edit-category-btn:hover, 
-        .delete-category-btn:hover {
-            color: var(--primary-color);
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-            
-            .cards {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .admin-panel {
-                width: 100%;
-                right: -100%;
-            }
+        .delete-btn:hover {
+            background-color: #c0392b;
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>我的导航页</h1>
-            <p class="subtitle">快速访问常用网站</p>
-        </header>
-        
-        <div class="search-box">
-            <input type="text" placeholder="搜索网站...">
-        </div>
-        
-        <div class="category" data-category-id="1">
-            <div class="category-actions">
-                <h2 class="category-title"><i class="fas fa-globe"></i> 常用网站</h2>
-                <div>
-                    <button class="edit-category-btn"><i class="fas fa-edit"></i> 编辑</button>
-                    <button class="delete-category-btn"><i class="fas fa-trash"></i> 删除</button>
-                </div>
-            </div>
-            <div class="cards">
-                <a href="https://www.google.com" class="card" target="_blank" data-site-id="1">
-                    <div class="card-icon"><i class="fab fa-google"></i></div>
-                    <h3 class="card-title">Google</h3>
-                    <p class="card-desc">全球搜索引擎</p>
-                    <div class="card-actions">
-                        <button class="edit-site-btn"><i class="fas fa-edit"></i></button>
-                        <button class="delete-site-btn"><i class="fas fa-trash"></i></button>
-                    </div>
-                </a>
-                
-                <a href="https://github.com" class="card" target="_blank" data-site-id="2">
-                    <div class="card-icon"><i class="fab fa-github"></i></div>
-                    <h3 class="card-title">GitHub</h3>
-                    <p class="card-desc">代码托管平台</p>
-                    <div class="card-actions">
-                        <button class="edit-site-btn"><i class="fas fa-edit"></i></button>
-                        <button class="delete-site-btn"><i class="fas fa-trash"></i></button>
-                    </div>
-                </a>
-                
-                <a href="https://cloudflare.com" class="card" target="_blank" data-site-id="3">
-                    <div class="card-icon"><i class="fas fa-cloud"></i></div>
-                    <h3 class="card-title">Cloudflare</h3>
-                    <p class="card-desc">网络基础设施服务</p>
-                    <div class="card-actions">
-                        <button class="edit-site-btn"><i class="fas fa-edit"></i></button>
-                        <button class="delete-site-btn"><i class="fas fa-trash"></i></button>
-                    </div>
-                </a>
-                
-                <a href="https://stackoverflow.com" class="card" target="_blank" data-site-id="4">
-                    <div class="card-icon"><i class="fab fa-stack-overflow"></i></div>
-                    <h3 class="card-title">Stack Overflow</h3>
-                    <p class="card-desc">开发者问答社区</p>
-                    <div class="card-actions">
-                        <button class="edit-site-btn"><i class="fas fa-edit"></i></button>
-                        <button class="delete-site-btn"><i class="fas fa-trash"></i></button>
-                    </div>
-                </a>
-            </div>
-        </div>
-        
-        <div class="category" data-category-id="2">
-            <div class="category-actions">
-                <h2 class="category-title"><i class="fas fa-tools"></i> 开发工具</h2>
-                <div>
-                    <button class="edit-category-btn"><i class="fas fa-edit"></i> 编辑</button>
-                    <button class="delete-category-btn"><i class="fas fa-trash"></i> 删除</button>
-                </div>
-            </div>
-            <div class="cards">
-                <a href="https://codepen.io" class="card" target="_blank" data-site-id="5">
-                    <div class="card-icon"><i class="fab fa-codepen"></i></div>
-                    <h3 class="card-title">CodePen</h3>
-                    <p class="card-desc">前端代码编辑器</p>
-                    <div class="card-actions">
-                        <button class="edit-site-btn"><i class="fas fa-edit"></i></button>
-                        <button class="delete-site-btn"><i class="fas fa-trash"></i></button>
-                    </div>
-                </a>
-                
-                <a href="https://jsfiddle.net" class="card" target="_blank" data-site-id="6">
-                    <div class="card-icon"><i class="fas fa-code"></i></div>
-                    <h3 class="card-title">JSFiddle</h3>
-                    <p class="card-desc">在线代码测试工具</p>
-                    <div class="card-actions">
-                        <button class="edit-site-btn"><i class="fas fa-edit"></i></button>
-                        <button class="delete-site-btn"><i class="fas fa-trash"></i></button>
-                    </div>
-                </a>
-                
-                <a href="https://regex101.com" class="card" target="_blank" data-site-id="7">
-                    <div class="card-icon"><i class="fas fa-terminal"></i></div>
-                    <h3 class="card-title">Regex101</h3>
-                    <p class="card-desc">正则表达式测试</p>
-                    <div class="card-actions">
-                        <button class="edit-site-btn"><i class="fas fa-edit"></i></button>
-                        <button class="delete-site-btn"><i class="fas fa-trash"></i></button>
-                    </div>
-                </a>
-                
-                <a href="https://www.json.cn" class="card" target="_blank" data-site-id="8">
-                    <div class="card-icon"><i class="fas fa-file-code"></i></div>
-                    <h3 class="card-title">JSON在线解析</h3>
-                    <p class="card-desc">JSON格式化工具</p>
-                    <div class="card-actions">
-                        <button class="edit-site-btn"><i class="fas fa-edit"></i></button>
-                        <button class="delete-site-btn"><i class="fas fa-trash"></i></button>
-                    </div>
-                </a>
-            </div>
-        </div>
-        
-        <footer>
-            <p>© 2023 我的导航页 | 部署于 Cloudflare</p>
-        </footer>
+    <h1>我的导航页</h1>
+    
+    <div class="controls">
+        <h3>添加新链接</h3>
+        <input type="text" id="linkName" placeholder="链接名称">
+        <input type="url" id="linkUrl" placeholder="https://example.com">
+        <button id="addBtn">添加</button>
     </div>
     
-    <!-- 管理按钮 -->
-    <div class="admin-btn" id="adminBtn">
-        <i class="fas fa-cog"></i>
+    <div class="container" id="linksContainer">
+        <!-- 链接将在这里动态生成 -->
     </div>
-    
-    <!-- 管理面板 -->
-    <div class="admin-panel" id="adminPanel">
-        <h2>管理导航页</h2>
-        
-        <div class="admin-tabs">
-            <button class="admin-tab active" data-tab="categories">分类管理</button>
-            <button class="admin-tab" data-tab="sites">网站管理</button>
-            <button class="admin-tab" data-tab="settings">设置</button>
-        </div>
-        
-        <div class="admin-tab-content active" data-tab-content="categories">
-            <h3>添加新分类</h3>
-            <div class="admin-form-group">
-                <label for="categoryName">分类名称</label>
-                <input type="text" id="categoryName" placeholder="输入分类名称">
-            </div>
-            <div class="admin-form-group">
-                <label for="categoryIcon">分类图标</label>
-                <select id="categoryIcon">
-                    <option value="fa-globe">全球</option>
-                    <option value="fa-tools">工具</option>
-                    <option value="fa-newspaper">新闻</option>
-                    <option value="fa-code">代码</option>
-                    <option value="fa-cloud">云</option>
-                    <option value="fa-book">书籍</option>
-                </select>
-            </div>
-            <div class="admin-actions">
-                <button class="admin-btn-cancel" id="cancelAddCategory">取消</button>
-                <button class="admin-btn-save" id="saveCategory">保存分类</button>
-            </div>
-            
-            <h3 style="margin-top: 30px;">现有分类</h3>
-            <div id="existingCategories">
-                <!-- 现有分类将通过JS动态加载 -->
-            </div>
-        </div>
-        
-        <div class="admin-tab-content" data-tab-content="sites">
-            <h3>添加新网站</h3>
-            <div class="admin-form-group">
-                <label for="siteCategory">所属分类</label>
-                <select id="siteCategory">
-                    <option value="1">常用网站</option>
-                    <option value="2">开发工具</option>
-                </select>
-            </div>
-            <div class="admin-form-group">
-                <label for="siteName">网站名称</label>
-                <input type="text" id="siteName" placeholder="输入网站名称">
-            </div>
-            <div class="admin-form-group">
-                <label for="siteUrl">网站URL</label>
-                <input type="text" id="siteUrl" placeholder="https://example.com">
-            </div>
-            <div class="admin-form-group">
-                <label for="siteDesc">网站描述</label>
-                <input type="text" id="siteDesc" placeholder="输入网站简短描述">
-            </div>
-            <div class="admin-form-group">
-                <label for="siteIcon">网站图标</label>
-                <select id="siteIcon">
-                    <option value="fa-link">链接</option>
-                    <option value="fa-globe">全球</option>
-                    <option value="fa-search">搜索</option>
-                    <option value="fa-code">代码</option>
-                    <option value="fa-cloud">云</option>
-                    <option value="fa-book">书籍</option>
-                </select>
-            </div>
-            <div class="admin-actions">
-                <button class="admin-btn-cancel" id="cancelAddSite">取消</button>
-                <button class="admin-btn-save" id="saveSite">保存网站</button>
-            </div>
-        </div>
-        
-        <div class="admin-tab-content" data-tab-content="settings">
-            <h3>页面设置</h3>
-            <div class="admin-form-group">
-                <label for="pageTitle">页面标题</label>
-                <input type="text" id="pageTitle" value="我的导航页">
-            </div>
-            <div class="admin-form-group">
-                <label for="pageSubtitle">页面副标题</label>
-                <input type="text" id="pageSubtitle" value="快速访问常用网站">
-            </div>
-            <div class="admin-form-group">
-                <label for="primaryColor">主色调</label>
-                <input type="color" id="primaryColor" value="#4a6fa5">
-            </div>
-            <div class="admin-actions">
-                <button class="admin-btn-cancel" id="cancelSettings">取消</button>
-                <button class="admin-btn-save" id="saveSettings">保存设置</button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- 遮罩层 -->
-    <div class="overlay" id="overlay"></div>
-    
+
     <script>
-        // 管理面板控制
-        const adminBtn = document.getElementById('adminBtn');
-        const adminPanel = document.getElementById('adminPanel');
-        const overlay = document.getElementById('overlay');
+        // 从本地存储加载链接
+        let links = JSON.parse(localStorage.getItem('navLinks')) || [];
         
-        adminBtn.addEventListener('click', () => {
-            adminPanel.classList.toggle('active');
-            overlay.classList.toggle('active');
-        });
+        // 初始示例链接（如果本地存储为空）
+        if (links.length === 0) {
+            links = [
+                { name: 'Google', url: 'https://google.com' },
+                { name: 'GitHub', url: 'https://github.com' },
+                { name: 'Cloudflare', url: 'https://cloudflare.com' }
+            ];
+            saveLinks();
+        }
         
-        overlay.addEventListener('click', () => {
-            adminPanel.classList.remove('active');
-            overlay.classList.remove('active');
-        });
+        // DOM 元素
+        const linksContainer = document.getElementById('linksContainer');
+        const linkNameInput = document.getElementById('linkName');
+        const linkUrlInput = document.getElementById('linkUrl');
+        const addBtn = document.getElementById('addBtn');
         
-        // 标签页切换
-        const tabs = document.querySelectorAll('.admin-tab');
-        const tabContents = document.querySelectorAll('.admin-tab-content');
-        
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const tabName = tab.getAttribute('data-tab');
-                
-                // 更新标签样式
-                tabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                
-                // 更新内容显示
-                tabContents.forEach(content => {
-                    if (content.getAttribute('data-tab-content') === tabName) {
-                        content.classList.add('active');
-                    } else {
-                        content.classList.remove('active');
-                    }
-                });
+        // 渲染链接
+        function renderLinks() {
+            linksContainer.innerHTML = '';
+            links.forEach((link, index) => {
+                const linkItem = document.createElement('div');
+                linkItem.className = 'link-item';
+                linkItem.innerHTML = `
+                    <a href="${link.url}" target="_blank">${link.name}</a>
+                    <div>
+                        <button class="edit-btn" data-index="${index}">编辑</button>
+                        <button class="delete-btn" data-index="${index}">删除</button>
+                    </div>
+                `;
+                linksContainer.appendChild(linkItem);
             });
-        });
-        
-        // 简单的搜索功能
-        document.querySelector('.search-box input').addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase();
-            const cards = document.querySelectorAll('.card');
             
-            cards.forEach(card => {
-                const title = card.querySelector('.card-title').textContent.toLowerCase();
-                const desc = card.querySelector('.card-desc').textContent.toLowerCase();
-                
-                if (title.includes(searchTerm) || desc.includes(searchTerm)) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
+            // 添加编辑和删除事件监听器
+            document.querySelectorAll('.edit-btn').forEach(btn => {
+                btn.addEventListener('click', editLink);
             });
-        });
-        
-        // 保存分类功能
-        document.getElementById('saveCategory').addEventListener('click', () => {
-            const name = document.getElementById('categoryName').value;
-            const icon = document.getElementById('categoryIcon').value;
             
-            if (name) {
-                // 这里应该发送到服务器保存，暂时只做前端演示
-                alert(`分类 "${name}" 已保存 (图标: ${icon})`);
-                document.getElementById('categoryName').value = '';
-            } else {
-                alert('请输入分类名称');
-            }
-        });
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', deleteLink);
+            });
+        }
         
-        // 保存网站功能
-        document.getElementById('saveSite').addEventListener('click', () => {
-            const category = document.getElementById('siteCategory').value;
-            const name = document.getElementById('siteName').value;
-            const url = document.getElementById('siteUrl').value;
-            const desc = document.getElementById('siteDesc').value;
-            const icon = document.getElementById('siteIcon').value;
+        // 保存链接到本地存储
+        function saveLinks() {
+            localStorage.setItem('navLinks', JSON.stringify(links));
+        }
+        
+        // 添加新链接
+        function addLink() {
+            const name = linkNameInput.value.trim();
+            const url = linkUrlInput.value.trim();
             
             if (name && url) {
-                // 这里应该发送到服务器保存，暂时只做前端演示
-                alert(`网站 "${name}" 已保存到分类 ${category}`);
-                document.getElementById('siteName').value = '';
-                document.getElementById('siteUrl').value = '';
-                document.getElementById('siteDesc').value = '';
-            } else {
-                alert('请输入网站名称和URL');
+                // 确保 URL 以 http:// 或 https:// 开头
+                const fullUrl = url.startsWith('http') ? url : `https://${url}`;
+                
+                links.push({ name, url: fullUrl });
+                saveLinks();
+                renderLinks();
+                
+                // 清空输入框
+                linkNameInput.value = '';
+                linkUrlInput.value = '';
             }
-        });
+        }
         
-        // 保存设置功能
-        document.getElementById('saveSettings').addEventListener('click', () => {
-            const title = document.getElementById('pageTitle').value;
-            const subtitle = document.getElementById('pageSubtitle').value;
-            const color = document.getElementById('primaryColor').value;
+        // 编辑链接
+        function editLink(e) {
+            const index = e.target.dataset.index;
+            const link = links[index];
             
-            // 更新页面
-            document.querySelector('h1').textContent = title;
-            document.querySelector('.subtitle').textContent = subtitle;
-            document.documentElement.style.setProperty('--primary-color', color);
-            
-            alert('设置已保存');
-        });
-        
-        // 编辑和删除按钮事件
-        document.querySelectorAll('.edit-site-btn, .delete-site-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                const card = btn.closest('.card');
-                const siteId = card.getAttribute('data-site-id');
-                
-                if (btn.classList.contains('edit-site-btn')) {
-                    alert(`编辑网站 ID: ${siteId}`);
-                } else {
-                    if (confirm('确定要删除这个网站吗？')) {
-                        card.remove();
-                    }
+            const newName = prompt('输入新名称:', link.name);
+            if (newName !== null) {
+                const newUrl = prompt('输入新 URL:', link.url);
+                if (newUrl !== null) {
+                    links[index] = {
+                        name: newName.trim(),
+                        url: newUrl.startsWith('http') ? newUrl.trim() : `https://${newUrl.trim()}`
+                    };
+                    saveLinks();
+                    renderLinks();
                 }
-            });
-        });
+            }
+        }
         
-        document.querySelectorAll('.edit-category-btn, .delete-category-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                const category = btn.closest('.category');
-                const categoryId = category.getAttribute('data-category-id');
-                
-                if (btn.classList.contains('edit-category-btn')) {
-                    alert(`编辑分类 ID: ${categoryId}`);
-                } else {
-                    if (confirm('确定要删除这个分类及其所有网站吗？')) {
-                        category.remove();
-                    }
-                }
-            });
-        });
+        // 删除链接
+        function deleteLink(e) {
+            if (confirm('确定要删除这个链接吗?')) {
+                const index = e.target.dataset.index;
+                links.splice(index, 1);
+                saveLinks();
+                renderLinks();
+            }
+        }
+        
+        // 事件监听器
+        addBtn.addEventListener('click', addLink);
+        
+        // 初始渲染
+        renderLinks();
     </script>
 </body>
 </html>
