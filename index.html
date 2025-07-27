@@ -3,91 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的导航中心</title>
+    <title>我的导航页</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary-color: #4361ee;
-            --secondary-color: #3f37c9;
-            --accent-color: #4895ef;
             --light-color: #f8f9fa;
             --dark-color: #212529;
-            --success-color: #4cc9f0;
-            --warning-color: #f72585;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            --text-muted: #6c757d;
         }
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: #f5f7fa;
             min-height: 100vh;
             padding: 2rem;
             color: var(--dark-color);
         }
         
-        .header {
-            text-align: center;
-            margin-bottom: 2rem;
-            animation: fadeIn 0.8s ease-out;
-        }
-        
-        .header h1 {
-            font-size: 2.5rem;
-            color: var(--secondary-color);
-            margin-bottom: 0.5rem;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
-        }
-        
-        .header p {
-            color: #6c757d;
-            font-size: 1.1rem;
-        }
-        
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
         }
         
-        .categories {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
+        header {
+            text-align: center;
             margin-bottom: 2rem;
         }
         
-        .category {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            padding: 1.5rem;
-            flex: 1;
-            min-width: 300px;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .category:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        
-        .category h2 {
+        h1 {
             color: var(--primary-color);
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--accent-color);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            margin-bottom: 0.5rem;
         }
         
         .links-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 1rem;
         }
         
@@ -100,14 +51,13 @@
             gap: 1rem;
             text-decoration: none;
             color: var(--dark-color);
-            border-left: 4px solid var(--accent-color);
-            transition: all 0.3s ease;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
+            border-left: 3px solid var(--primary-color);
         }
         
         .link-card:hover {
-            background: #f8f9fa;
-            transform: translateX(5px);
+            transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
@@ -115,7 +65,6 @@
             width: 32px;
             height: 32px;
             object-fit: contain;
-            border-radius: 4px;
         }
         
         .link-info {
@@ -133,30 +82,20 @@
         
         .link-url {
             font-size: 0.8rem;
-            color: #6c757d;
+            color: var(--text-muted);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
         
-        .footer {
+        footer {
             text-align: center;
-            margin-top: 3rem;
-            color: #6c757d;
+            margin-top: 2rem;
+            color: var(--text-muted);
             font-size: 0.9rem;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            .categories {
-                flex-direction: column;
-            }
-            
+        @media (max-width: 600px) {
             .links-grid {
                 grid-template-columns: 1fr;
             }
@@ -165,85 +104,73 @@
 </head>
 <body>
     <div class="container">
-        <header class="header">
-            <h1><i class="fas fa-compass"></i> 我的导航中心</h1>
-            <p>常用网站集合，一键直达</p>
+        <header>
+            <h1><i class="fas fa-star"></i> 常用网站</h1>
+            <p>快速访问我常用的网站</p>
         </header>
         
-        <main id="categoriesContainer">
-            <!-- 分类将通过JavaScript动态加载 -->
-            <div class="loading">
-                <i class="fas fa-spinner fa-spin"></i> 加载中...
-            </div>
+        <main>
+            <div class="links-grid" id="linksContainer"></div>
         </main>
         
-        <footer class="footer">
-            <p>最后更新: <span id="updateDate"></span> | 共 <span id="totalLinks">0</span> 个链接</p>
+        <footer>
+            <p>共 <span id="totalLinks">0</span> 个链接 | 最后更新: <span id="updateDate"></span></p>
         </footer>
     </div>
 
     <script>
-        // 加载数据并渲染页面
         document.addEventListener('DOMContentLoaded', async function() {
             try {
-                const response = await fetch('data.json');
-                if (!response.ok) throw new Error('网络响应不正常');
+                const response = await fetch('links.json');
+                if (!response.ok) throw new Error('加载失败');
                 
                 const data = await response.json();
-                renderPage(data);
+                renderLinks(data.links);
                 
                 // 更新页脚信息
                 document.getElementById('updateDate').textContent = new Date().toLocaleDateString();
-                document.getElementById('totalLinks').textContent = countTotalLinks(data.categories);
+                document.getElementById('totalLinks').textContent = data.links.length;
             } catch (error) {
                 console.error('加载数据失败:', error);
-                document.getElementById('categoriesContainer').innerHTML = `
-                    <div class="error-message">
-                        <i class="fas fa-exclamation-triangle"></i> 无法加载导航数据，请检查data.json文件
+                document.getElementById('linksContainer').innerHTML = `
+                    <div style="grid-column:1/-1; text-align:center; color:red;">
+                        <i class="fas fa-exclamation-triangle"></i> 无法加载链接数据
                     </div>
                 `;
             }
         });
         
-        function countTotalLinks(categories) {
-            return categories.reduce((total, category) => total + category.links.length, 0);
-        }
-        
-        function renderPage(data) {
-            const container = document.getElementById('categoriesContainer');
-            container.innerHTML = '';
+        function renderLinks(links) {
+            const container = document.getElementById('linksContainer');
             
-            data.categories.forEach(category => {
-                const categoryElement = document.createElement('div');
-                categoryElement.className = 'category';
-                categoryElement.innerHTML = `
-                    <h2><i class="${category.icon || 'fas fa-folder'}"></i> ${category.name}</h2>
-                    <div class="links-grid" id="links-${category.id}"></div>
+            links.forEach(link => {
+                const domain = extractDomain(link.url);
+                const faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}`;
+                
+                const card = document.createElement('a');
+                card.className = 'link-card';
+                card.href = link.url;
+                card.target = '_blank';
+                card.innerHTML = `
+                    <img src="${faviconUrl}" alt="${domain}" class="favicon" onerror="this.src='https://www.google.com/favicon.ico'">
+                    <div class="link-info">
+                        <div class="link-name">${link.name}</div>
+                        <div class="link-url">${domain}</div>
+                    </div>
+                    <i class="fas fa-external-link-alt" style="color: #adb5bd;"></i>
                 `;
                 
-                container.appendChild(categoryElement);
-                
-                const linksContainer = document.getElementById(`links-${category.id}`);
-                category.links.forEach(link => {
-                    const domain = new URL(link.url).hostname.replace('www.', '');
-                    const faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}`;
-                    
-                    const linkElement = document.createElement('a');
-                    linkElement.className = 'link-card';
-                    linkElement.href = link.url;
-                    linkElement.target = '_blank';
-                    linkElement.innerHTML = `
-                        <img src="${faviconUrl}" alt="${domain} favicon" class="favicon" onerror="this.src='https://www.google.com/favicon.ico'">
-                        <div class="link-info">
-                            <div class="link-name">${link.name}</div>
-                            <div class="link-url">${domain}</div>
-                        </div>
-                        <i class="fas fa-external-link-alt" style="color: #adb5bd;"></i>
-                    `;
-                    
-                    linksContainer.appendChild(linkElement);
-                });
+                container.appendChild(card);
             });
+        }
+        
+        function extractDomain(url) {
+            try {
+                const domain = new URL(url).hostname.replace('www.', '');
+                return domain;
+            } catch {
+                return url;
+            }
         }
     </script>
 </body>
