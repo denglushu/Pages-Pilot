@@ -1,0 +1,88 @@
+{
+    "categories": [
+        {
+            "id": "work",
+            "name": "工作相关",
+            "icon": "fas fa-briefcase",
+            "links": [
+                {
+                    "name": "Google 搜索",
+                    "url": "https://www.google.com"
+                },
+                {
+                    "name": "GitHub",
+                    "url": "https://github.com"
+                },
+                {
+                    "name": "Cloudflare",
+                    "url": "https://www.cloudflare.com"
+                },
+                {
+                    "name": "Stack Overflow",
+                    "url": "https://stackoverflow.com"
+                }
+            ]
+        },
+        {
+            "id": "dev",
+            "name": "开发工具",
+            "icon": "fas fa-code",
+            "links": [
+                {
+                    "name": "MDN Web Docs",
+                    "url": "https://developer.mozilla.org"
+                },
+                {
+                    "name": "CodePen",
+                    "url": "https://codepen.io"
+                },
+                {
+                    "name": "JSFiddle",
+                    "url": "https://jsfiddle.net"
+                },
+                {
+                    "name": "Can I use",
+                    "url": "https://caniuse.com"
+                }
+            ]
+        },
+        {
+            "id": "news",
+            "name": "新闻资讯",
+            "icon": "fas fa-newspaper",
+            "links": [
+                {
+                    "name": "BBC 新闻",
+                    "url": "https://www.bbc.com/news"
+                },
+                {
+                    "name": "Reuters",
+                    "url": "https://www.reuters.com"
+                },
+                {
+                    "name": "TechCrunch",
+                    "url": "https://techcrunch.com"
+                }
+            ]
+        },
+        {
+            "id": "social",
+            "name": "社交媒体",
+            "icon": "fas fa-share-alt",
+            "links": [
+                {
+                    "name": "Twitter",
+                    "url": "https://twitter.com"
+                },
+                {
+                    "name": "Facebook",
+                    "url": "https://www.facebook.com"
+                },
+                {
+                    "name": "LinkedIn",
+                    "url": "https://www.linkedin.com"
+                }
+            ]
+        }
+    ]
+}
